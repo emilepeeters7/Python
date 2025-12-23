@@ -20,6 +20,7 @@ FUNCTIONALITEITEN
 - Brommers wijzigen
 - Zoeken naar brommers op naam of merk
 - Overzicht tonen van de opgeslagen brommers
+- Overzicht naar een tekst file printen
 
 
 BEDOELING VAN DIT PROJECT

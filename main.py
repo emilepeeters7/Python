@@ -7,6 +7,7 @@ def show_menu():
     print("#  3) Brommer wijzigen                   #")
     print("#  4) Brommer verwijderen/verkocht       #")
     print("#  5) Brommer zoeken op merk of model    #")
+    print("#  6) Overzicht printen naar een file    #")
     print("#  0) Exit                               #")
     print("##########################################")
     
