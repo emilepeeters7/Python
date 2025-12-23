@@ -50,7 +50,37 @@ def main():
 
 
         elif choice == '3':
-            break
+            brommer_id = input("ID van de brommer die je wilt wijzigen: ")
+            cursor = db.execute("SELECT * FROM brommers WHERE id=?", (brommer_id,))
+            brommer = cursor.fetchone()
+
+            if brommer:
+                print(f"Wijzig brommer: {brommer[1]} {brommer[2]} (ID: {brommer[0]})")
+
+    
+                merk = input(f"Nieuw merk [{brommer[1]}]: ") or brommer[1]
+                model = input(f"Nieuw model [{brommer[2]}]: ") or brommer[2]
+                productiedatum = input(f"Nieuwe productiedatum [{brommer[3]}]: ") or brommer[3]
+                prijs_input = input(f"Nieuwe prijs [{brommer[4]}]: ")
+                prijs = float(prijs_input) if prijs_input else brommer[4]
+                vinnummer = input(f"Nieuwe VIN [{brommer[5]}]: ") or brommer[5]
+
+                db.execute(
+                    """
+                    UPDATE brommers
+                    SET merk=?, model=?, productiedatum=?, prijs=?, vinnummer=?
+                    WHERE id=?
+                    """,
+                    (merk, model, productiedatum, prijs, vinnummer, brommer_id)
+                )
+
+                print("Brommer succesvol gewijzigd.")
+            else:
+                    print("Brommer met dit ID niet gevonden.")
+
+            
+            
+                        
         elif choice == '4':
             break
         elif choice == '5':
