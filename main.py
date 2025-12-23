@@ -29,8 +29,26 @@ def main():
                       f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}")
 
             
+            
+            
         elif choice == '2':   
-            break
+            print("------------------------------------------")
+            print("BROMMER TOEVOEGEN")
+            merk = input("Merk: ")
+            model = input("Model: ")
+            productiedatum = input("Productiedatum (YYYY-MM-DD): ")
+            prijs = float(input("Prijs: "))
+            vinnummer = input("Vinnummer: ")
+
+            db.execute(
+                "INSERT INTO brommers (merk, model, productiedatum, prijs, vinnummer) VALUES (?, ?, ?, ?, ?)",
+                (merk, model, productiedatum, prijs, vinnummer)
+            )
+            print("Brommer toegevoegd.")
+
+    
+
+
         elif choice == '3':
             break
         elif choice == '4':
