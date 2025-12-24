@@ -100,7 +100,37 @@ def main():
 
 
         elif choice == '5':
+            zoekterm = input("Zoek op merk of model: ")
+
+            cursor = db.execute(
+                """
+                SELECT id, merk, model, productiedatum, prijs, vinnummer
+                FROM brommers
+                WHERE merk LIKE ? OR model LIKE ?
+                """,
+                (f"%{zoekterm}%", f"%{zoekterm}%")
+            )
+
+            resultaten = cursor.fetchall()
+
+            if resultaten:
+                print("\nGevonden brommers:")
+                for b in resultaten:
+                    print(
+                        f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
+                        f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}"
+                    )
+            else:
+                print("Geen brommers gevonden met deze zoekterm.")
+
+
+
+
+        elif choice == '6':
             break
+
+            
+            
         elif choice == '0':
             break
             
