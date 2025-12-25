@@ -127,7 +127,30 @@ def main():
 
 
         elif choice == '6':
-            break
+            cursor = db.execute(
+                "SELECT id, merk, model, productiedatum, prijs, vinnummer FROM brommers"
+            )
+            brommers = cursor.fetchall()
+
+            if not brommers:
+                print("Geen brommers om te exporteren.")
+            else:
+                with open("overzicht_brommers.txt", "w", encoding="utf-8") as file:
+                    file.write("OVERZICHT BROMMERS\n")
+                    file.write("=" * 50 + "\n\n")
+
+                    for b in brommers:
+                        file.write(
+                            f"ID: {b[0]}\n"
+                            f"Merk: {b[1]}\n"
+                            f"Model: {b[2]}\n"
+                            f"Productiedatum: {b[3]}\n"
+                            f"Prijs: €{b[4]}\n"
+                            f"VIN: {b[5]}\n"
+                            + "-" * 50 + "\n"
+                    )
+
+            print("Overzicht succesvol opgeslagen in 'overzicht_brommers.txt'")
 
             
             
