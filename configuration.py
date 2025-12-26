@@ -1,3 +1,5 @@
 import os
 
-DATABASE_PATH = os.path.join(os.path.dirname(__file__), "database.db")
+BASE_DIR = os.path.dirname(__file__)
+DATABASE_PATH = os.path.join(BASE_DIR, "data", "brommers.db")
+

@@ -58,7 +58,7 @@ def main():
     except KeyboardInterrupt:
         print("\n\nProgramma wordt afgesloten.")
     finally:
-        db.close()   # ✅ altijd sluiten
+        db.close()  
 
 
 def optie1(db):
@@ -160,7 +160,7 @@ def optie3(db):
         """,
         (merk, model, productiedatum, prijs, vinnummer, brommer_id)
     )
-    db.commit()   # ✅ ontbrak
+    db.commit()   
     print("Brommer succesvol gewijzigd.")
 
 
@@ -180,7 +180,7 @@ def optie4(db):
     )
     if bevestiging.lower() == 'j':
         db.execute("DELETE FROM brommers WHERE id=?", (brommer_id,))
-        db.commit()   # ✅ ontbrak
+        db.commit()   
         print("Brommer verwijderd.")
     else:
         print("Verwijderen geannuleerd.")

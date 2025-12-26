@@ -20,7 +20,7 @@ FUNCTIONALITEITEN
 - Brommers wijzigen
 - Zoeken naar brommers op naam of merk
 - Overzicht tonen van de opgeslagen brommers
-- Overzicht naar een tekst file printen
+- Overzicht naar een csv file printen om te kunnen openen in Excel
 
 
 BEDOELING VAN DIT PROJECT
@@ -36,3 +36,12 @@ De mogelijkheid om brommers toe te voegen wanneer er nieuwe brommers in de winke
 Brommers kunnen verwijderen uit de lijst als ze verkocht zijn of niet meer in de winkel aanwezig zijn.
 Zoekfunctionaliteit (bijvoorbeeld op merk of naam) als klanten voor een specifieke brommer zoeken.
 Het doel is om met een eenvoudige command line applicatie snel inzicht te krijgen in de voorraad.
+
+
+WERKING
+====================================================================
+clone het bestand 
+unzip het bestand start spyder op en open alle files 
+start de main
+doorloop de applicatie door in de terminal verschillende opties in te geven
+voor de CSV file komt deze automatisch in de map terecht die je hebt unzipt

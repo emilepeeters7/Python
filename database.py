@@ -5,14 +5,11 @@ import configuration
 
 class Database:
     def __init__(self):
-        # Ensure the folder exists
         os.makedirs(os.path.dirname(configuration.DATABASE_PATH), exist_ok=True)
 
-        # Connect to the database
         self.conn = sqlite3.connect(configuration.DATABASE_PATH)
         self.cursor = self.conn.cursor()
 
-        # Create tables if they don't exist
         self.create_tables()
 
     def execute(self, sql, params=None):
