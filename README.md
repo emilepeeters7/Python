@@ -45,3 +45,4 @@ unzip het bestand start spyder op en open alle files
 start de main
 doorloop de applicatie door in de terminal verschillende opties in te geven
 voor de CSV file komt deze automatisch in de map terecht die je hebt unzipt
+de database komt onder /data/brommers.db
