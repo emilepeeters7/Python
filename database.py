@@ -4,15 +4,24 @@ class Database:
     def __init__(self):
         base_dir = os.path.dirname(os.path.abspath(__file__))
 
-        config = configparser.ConfigParser()
-        config.read(os.path.join(base_dir, "settings.ini"))
+        config_path = os.path.join(base_dir, "settings.ini")
+        if not os.path.exists(config_path):
+            raise FileNotFoundError("settings.ini niet gevonden. Kopieer settings_example.ini naar settings.ini")
 
-        db_path = config["database"]["path"]
-        db_path = os.path.join(base_dir, db_path)
+        config = configparser.ConfigParser()
+        config.read(config_path)
+
+        if "database" not in config:
+            raise KeyError("Sectie [database] ontbreekt in settings.ini")
+
+        db_path = os.path.join(base_dir, config["database"]["path"])
 
         os.makedirs(os.path.dirname(db_path), exist_ok=True)
+
+
         self.conn = sqlite3.connect(db_path)
         self.create_tables()
+
 
     def create_tables(self):
         cursor = self.conn.cursor()
