@@ -1,31 +1,31 @@
-import sqlite3, configparser, os
+import sqlite3
+import os
+import configuration
+
 
 class Database:
     def __init__(self):
-        base_dir = os.path.dirname(os.path.abspath(__file__))
+        # Ensure the folder exists
+        os.makedirs(os.path.dirname(configuration.DATABASE_PATH), exist_ok=True)
 
-        config_path = os.path.join(base_dir, "settings.ini")
-        if not os.path.exists(config_path):
-            raise FileNotFoundError("settings.ini niet gevonden. Kopieer settings_example.ini naar settings.ini")
+        # Connect to the database
+        self.conn = sqlite3.connect(configuration.DATABASE_PATH)
+        self.cursor = self.conn.cursor()
 
-        config = configparser.ConfigParser()
-        config.read(config_path)
-
-        if "database" not in config:
-            raise KeyError("Sectie [database] ontbreekt in settings.ini")
-
-        db_path = os.path.join(base_dir, config["database"]["path"])
-
-        os.makedirs(os.path.dirname(db_path), exist_ok=True)
-
-
-        self.conn = sqlite3.connect(db_path)
+        # Create tables if they don't exist
         self.create_tables()
 
+    def execute(self, sql, params=None):
+        if params is None:
+            return self.cursor.execute(sql)
+        else:
+            return self.cursor.execute(sql, params)
+
+    def commit(self):
+        self.conn.commit()
 
     def create_tables(self):
-        cursor = self.conn.cursor()
-        cursor.execute("""
+        self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS brommers (
                 id INTEGER PRIMARY KEY,
                 merk TEXT NOT NULL,
@@ -35,13 +35,12 @@ class Database:
                 vinnummer TEXT NOT NULL UNIQUE
             )
         """)
-        self.conn.commit()
+        self.commit()
 
-    def execute(self, query, params=()):
-        cursor = self.conn.cursor()
-        cursor.execute(query, params)
-        self.conn.commit()
-        return cursor
-    
     def close(self):
         self.conn.close()
+
+
+if __name__ == "__main__":
+    db = Database()
+    print("Database and tables are created")
