@@ -14,7 +14,7 @@ def show_menu():
 def main():
     
     db = Database()
-    
+    try:
         while True:
             show_menu()
             print("\n")
@@ -157,12 +157,14 @@ def main():
             
             
             elif choice == '0':
+                print("\nProgramma wordt afgesloten.")
                 break
             
             else:
-                print("Je hebt enkel de keuze tussen bovenstaande opties (0-6)")
+                print("Voer een nummer in van 0-6")
             
-    
+    except KeyboardInterrupt:
+        print("\n\nProgramma wordt afgesloten.")
                 
             
 if __name__ == '__main__':
