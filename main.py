@@ -33,26 +33,8 @@ def main():
                 optie4(db)
 
             elif choice == '5':
-                zoekterm = input("Zoek op merk of model: ")
-                cursor = db.execute(
-                    """
-                    SELECT id, merk, model, productiedatum, prijs, vinnummer
-                    FROM brommers
-                    WHERE merk LIKE ? OR model LIKE ?
-                    """,
-                    (f"%{zoekterm}%", f"%{zoekterm}%")
-                )
-                resultaten = cursor.fetchall()
-                if resultaten:
-                    print("\nGevonden brommers:")
-                    for b in resultaten:
-                        print(
-                            f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
-                            f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}"
-                        )
-                else:
-                    print("Geen brommers gevonden met deze zoekterm.")
-
+                optie5(db)
+                
             elif choice == '6':
                 cursor = db.execute(
                     "SELECT id, merk, model, productiedatum, prijs, vinnummer FROM brommers"
@@ -87,6 +69,7 @@ def main():
     except KeyboardInterrupt:
         print("\n\nProgramma wordt afgesloten.")
         db.close()
+    
     
     
 def optie1(db):
@@ -187,6 +170,29 @@ def optie4(db):
             print("Verwijderen geannuleerd.")
     else:
         print("Brommer niet gevonden.")
-                      
+               
+        
+def optie5(db):
+    zoekterm = input("Zoek op merk of model: ")
+    cursor = db.execute(
+        """
+        SELECT id, merk, model, productiedatum, prijs, vinnummer
+        FROM brommers
+        WHERE merk LIKE ? OR model LIKE ?
+        """,
+        (f"%{zoekterm}%", f"%{zoekterm}%")
+    )
+    resultaten = cursor.fetchall()
+    if resultaten:
+        print("\nGevonden brommers:")
+        for b in resultaten:
+            print(
+                f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
+                f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}"
+            )
+    else:
+        print("Geen brommers gevonden met deze zoekterm.")
+
+
 if __name__ == '__main__':
     main()
