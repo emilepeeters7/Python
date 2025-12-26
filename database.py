@@ -5,14 +5,8 @@ class Database:
         config = configparser.ConfigParser()
         config.read("settings.ini")
         db_path = config["database"]["path"]
-
-        # Maak map data/ aan indien nodig
         os.makedirs(os.path.dirname(db_path), exist_ok=True)
-
-        # Verbind met database
         self.conn = sqlite3.connect(db_path)
-
-        # Maak tabel aan
         self.create_tables()
 
     def create_tables(self):
@@ -24,7 +18,7 @@ class Database:
                 model TEXT NOT NULL,
                 productiedatum TEXT NOT NULL,
                 prijs REAL NOT NULL,
-                vinnummer TEXT NOT NULL
+                vinnummer TEXT NOT NULL UNIQUE
             )
         """)
         self.conn.commit()
@@ -34,3 +28,6 @@ class Database:
         cursor.execute(query, params)
         self.conn.commit()
         return cursor
+    
+    def close(self):
+        self.conn.close()
