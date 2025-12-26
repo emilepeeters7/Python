@@ -21,15 +21,9 @@ def main():
             choice = input("Keuze: ")
             
             if choice == '1':
-                print("------------------------------------------")
-                print("OVERZICHT")
-                cursor = db.execute(
-                    "SELECT id, merk, model, productiedatum, prijs, vinnummer FROM brommers"
-                )
-                for b in cursor.fetchall():
-                    print(f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
-                          f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}")
-            
+                optie1(db)
+                
+                
             elif choice == '2':   
                 print("------------------------------------------")
                 print("BROMMER TOEVOEGEN")
@@ -154,7 +148,17 @@ def main():
     except KeyboardInterrupt:
         print("\n\nProgramma wordt afgesloten.")
         db.close()
-
-                     
+    
+def optie1(db):
+        print("------------------------------------------")
+        print("OVERZICHT")
+        cursor = db.execute(
+            "SELECT id, merk, model, productiedatum, prijs, vinnummer FROM brommers"
+        )
+        for b in cursor.fetchall():
+            print(f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
+                  f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}")
+    
+                         
 if __name__ == '__main__':
     main()
