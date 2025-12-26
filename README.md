@@ -1,5 +1,5 @@
 ############ BROMMERLIJST ############
-
+(NOTE: models.py en database.db heb ik verwijderd omdat deze niet nodig zijn en toch leeg zijn)
 OPDRACHT
 --------------------------------------------------------------------
 Dit is een eenvoudige command-line applicatie geschreven in Python.
