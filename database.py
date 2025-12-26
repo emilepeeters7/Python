@@ -2,9 +2,14 @@ import sqlite3, configparser, os
 
 class Database:
     def __init__(self):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+
         config = configparser.ConfigParser()
-        config.read("settings.ini")
+        config.read(os.path.join(base_dir, "settings.ini"))
+
         db_path = config["database"]["path"]
+        db_path = os.path.join(base_dir, db_path)
+
         os.makedirs(os.path.dirname(db_path), exist_ok=True)
         self.conn = sqlite3.connect(db_path)
         self.create_tables()
