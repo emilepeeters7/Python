@@ -32,6 +32,23 @@ class Database:
                 vinnummer TEXT NOT NULL UNIQUE
             )
         """)
+        dummy_brommers = [
+            ("Piaggio", "Vespa Primavera", "2021-03-15", 2800.00, "VIN0001"),
+            ("Yamaha", "Aerox", "2020-07-10", 2500.50, "VIN0002"),
+            ("Honda", "PCX125", "2019-05-22", 2700.75, "VIN0003"),
+            ("KTM", "Duke 125", "2022-01-18", 3200.00, "VIN0004"),
+        ]
+        
+        for merk, model, productiedatum, prijs, vinnummer in dummy_brommers:
+            try:
+                self.cursor.execute(
+                    "INSERT INTO brommers (merk, model, productiedatum, prijs, vinnummer) VALUES (?, ?, ?, ?, ?)",
+                    (merk, model, productiedatum, prijs, vinnummer)
+                )
+            except sqlite3.IntegrityError:
+                # Als het VIN al bestaat, sla over
+                continue
+            
         self.commit()
 
     def close(self):
