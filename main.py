@@ -30,18 +30,7 @@ def main():
                 optie3(db)
                 
             elif choice == '4':
-                brommer_id = input("ID van de brommer die je wilt verwijderen: ")
-                cursor = db.execute("SELECT id, merk, model FROM brommers WHERE id=?", (brommer_id,))
-                brommer = cursor.fetchone()
-                if brommer:
-                    bevestiging = input(f"Weet je zeker dat je {brommer[1]} {brommer[2]} wilt verwijderen? (j/n): ")
-                    if bevestiging.lower() == 'j':
-                        db.execute("DELETE FROM brommers WHERE id=?", (brommer_id,))
-                        print("Brommer verwijderd.")
-                    else:
-                        print("Verwijderen geannuleerd.")
-                else:
-                    print("Brommer niet gevonden.")
+                optie4(db)
 
             elif choice == '5':
                 zoekterm = input("Zoek op merk of model: ")
@@ -184,6 +173,20 @@ def optie3(db):
     else:
         print("Brommer met dit ID niet gevonden.")
 
+
+def optie4(db):
+    brommer_id = input("ID van de brommer die je wilt verwijderen: ")
+    cursor = db.execute("SELECT id, merk, model FROM brommers WHERE id=?", (brommer_id,))
+    brommer = cursor.fetchone()
+    if brommer:
+        bevestiging = input(f"Weet je zeker dat je {brommer[1]} {brommer[2]} wilt verwijderen? (j/n): ")
+        if bevestiging.lower() == 'j':
+            db.execute("DELETE FROM brommers WHERE id=?", (brommer_id,))
+            print("Brommer verwijderd.")
+        else:
+            print("Verwijderen geannuleerd.")
+    else:
+        print("Brommer niet gevonden.")
                       
 if __name__ == '__main__':
     main()
