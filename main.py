@@ -114,19 +114,36 @@ def optie1(db):
 def optie2(db):
     print("------------------------------------------")
     print("BROMMER TOEVOEGEN")
-    merk = input("Merk: ")
-    model = input("Model: ")
-    productiedatum = input("Productiedatum (YYYY-MM-DD): ")
     while True:
-        prijs_input = input("Prijs: ")
+        merk = input("Merk: ").strip()
+        if merk:
+            break
+        print("Merk mag niet leeg zijn.")
+    while True:
+        model = input("Model: ").strip()
+        if model:
+            break
+        print("Model mag niet leeg zijn.")
+    while True:
+        productiedatum = input("Productiedatum (YYYY-MM-DD): ").strip()
+        if productiedatum:
+            break
+        print("Productiedatum mag niet leeg zijn.")
+    while True:
+        prijs_input = input("Prijs: ").strip()
         try:
             prijs = float(prijs_input)
-            break  
+            break
         except ValueError:
-            print("Ongeldige prijs. Voer een geldig getal in")
-    vinnummer = input("Vinnummer: ")
+            print("Ongeldige prijs. Voer een geldig getal in.")
+    while True:
+        vinnummer = input("Vinnummer: ").strip()
+        if vinnummer:
+            break
+        print("Vinnummer mag niet leeg zijn.")
     db.execute(
-        "INSERT INTO brommers (merk, model, productiedatum, prijs, vinnummer) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO brommers (merk, model, productiedatum, prijs, vinnummer) "
+        "VALUES (?, ?, ?, ?, ?)",
         (merk, model, productiedatum, prijs, vinnummer)
     )
     print("Brommer toegevoegd.")
