@@ -23,26 +23,8 @@ def main():
             if choice == '1':
                 optie1(db)
                 
-                
             elif choice == '2':   
-                print("------------------------------------------")
-                print("BROMMER TOEVOEGEN")
-                merk = input("Merk: ")
-                model = input("Model: ")
-                productiedatum = input("Productiedatum (YYYY-MM-DD): ")
-                while True:
-                    prijs_input = input("Prijs: ")
-                    try:
-                        prijs = float(prijs_input)
-                        break  
-                    except ValueError:
-                        print("Ongeldige prijs. Voer een geldig getal in")
-                vinnummer = input("Vinnummer: ")
-                db.execute(
-                    "INSERT INTO brommers (merk, model, productiedatum, prijs, vinnummer) VALUES (?, ?, ?, ?, ?)",
-                    (merk, model, productiedatum, prijs, vinnummer)
-                )
-                print("Brommer toegevoegd.")
+                optie2(db)
     
             elif choice == '3':
                 print("------------------------------------------")
@@ -141,7 +123,7 @@ def main():
                 print("\nProgramma wordt afgesloten.")
                 break
                 db.close()
-
+                
             else:
                 print("Voer een nummer in van 0-6")
             
@@ -149,16 +131,37 @@ def main():
         print("\n\nProgramma wordt afgesloten.")
         db.close()
     
-def optie1(db):
-        print("------------------------------------------")
-        print("OVERZICHT")
-        cursor = db.execute(
-            "SELECT id, merk, model, productiedatum, prijs, vinnummer FROM brommers"
-        )
-        for b in cursor.fetchall():
-            print(f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
-                  f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}")
     
+def optie1(db):
+    print("------------------------------------------")
+    print("OVERZICHT")
+    cursor = db.execute(
+        "SELECT id, merk, model, productiedatum, prijs, vinnummer FROM brommers"
+    )
+    for b in cursor.fetchall():
+        print(f"ID: {b[0]} | Merk: {b[1]} | Model: {b[2]} | "
+              f"Productiedatum: {b[3]} | Prijs: €{b[4]} | VIN: {b[5]}")
+
+
+def optie2(db):
+    print("------------------------------------------")
+    print("BROMMER TOEVOEGEN")
+    merk = input("Merk: ")
+    model = input("Model: ")
+    productiedatum = input("Productiedatum (YYYY-MM-DD): ")
+    while True:
+        prijs_input = input("Prijs: ")
+        try:
+            prijs = float(prijs_input)
+            break  
+        except ValueError:
+            print("Ongeldige prijs. Voer een geldig getal in")
+    vinnummer = input("Vinnummer: ")
+    db.execute(
+        "INSERT INTO brommers (merk, model, productiedatum, prijs, vinnummer) VALUES (?, ?, ?, ?, ?)",
+        (merk, model, productiedatum, prijs, vinnummer)
+    )
+    print("Brommer toegevoegd.")
                          
 if __name__ == '__main__':
     main()
