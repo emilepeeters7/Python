@@ -39,7 +39,15 @@ def main():
                 merk = input("Merk: ")
                 model = input("Model: ")
                 productiedatum = input("Productiedatum (YYYY-MM-DD): ")
-                prijs = float(input("Prijs: "))
+                while True:
+                    prijs_input = input("Prijs: ")
+                    try:
+                        prijs = float(prijs_input)
+                        break  
+                    except ValueError:
+                        print("Ongeldige prijs. Voer een geldig getal in")
+
+                
                 vinnummer = input("Vinnummer: ")
 
                 db.execute(
